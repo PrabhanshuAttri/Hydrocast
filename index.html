@@ -37,6 +37,98 @@
                 background: -moz-linear-gradient(rgba(175,175,175,0), rgba(39,39,39,1));
                 background: linear-gradient(rgba(175,175,175,0), rgba(39,39,39,1));
             }
+
+            input {
+                position: absolute;
+                top: 15px;
+            }
+
+            progress, input {
+                width: 300px;
+            }
+
+            progress[value] {
+                -webkit-appearance: none;
+                   -moz-appearance: none;
+                        appearance: none;
+
+                border: none;
+                height: 5px;
+
+                /* For IE10 */
+                color: blue;
+            }
+
+            progress[value]::-webkit-progress-value {
+                background-color: blue;
+            }
+
+            progress[value]::-moz-progress-bar {
+                background-color: blue;
+            }
+
+            input[type="range"] {
+                -webkit-appearance: none;
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+                -moz-apperance: none !important;
+                /* height: 4px; */
+                background: none;
+                outline: none !important;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            input[type="range"]:focus {
+                outline: none;
+                border: none;
+            }
+
+            input[type="range"]::-moz-range-track {
+                border: none;
+                background: transparent;
+                outline: none;
+            }
+
+            input[type="range"]::-ms-track {
+                border: inherit;
+                color: transparent; /* don't drawn vertical reference line */
+                background: transparent;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                background-color: blue;
+                height: 15px;
+                width: 15px;
+                border-radius: 50%;
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                -moz-appearance: none;
+                background: blue;
+                height: 15px;
+                width: 15px;
+                border-radius: 50%;
+                border: none;
+            }
+
+            input[type="range"]::-ms-thumb {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                border: 0;
+                background: blue;
+            }
+
+            input[type="range"]::-ms-fill-lower,
+            input[type="range"]::-ms-fill-upper {
+              background: transparent;
+            }
+
+            input[type="range"]::-ms-tooltip {
+              display: none;
+            }
         </style>
     </head>
     <body>
@@ -48,6 +140,14 @@
             </video>
             <div class="controls">
                 <div class="typcn typcn-media-play"></div>
+                <div class="typcn typcn-media-stop"></div>
+                <div class="seek-bar">
+                    <input type="range" value="50" max="100" step="1">
+                    <progress value="5" max="100"></progress>
+                </div>
+                <div class="typcn typcn-volume-down"></div>
+                <div class="typcn typcn-volume-up"></div>
+                <div class="typcn typcn-volume-mute"></div>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -55,6 +155,10 @@
             $("video").bind("click", function () {
                 var vid = $(this).get(0);
                 if (vid.paused) vid.play(); else vid.pause();
+            });
+            $("input").change(function (e) {
+                var value = e.target.value;
+                $("progress").val(value);
             });
         </script>
     </body>
