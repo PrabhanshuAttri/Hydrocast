@@ -1,15 +1,35 @@
 <html>
     <head>
         <title>Hydrocast | Prabhanshu Attri</title>
-        <link rel="stylesheet" href="css/style.css"/>
+        <style>
+            body {
+                margin: 0px;
+                padding: 0px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #546e7a;
+            }
+
+            .hydrocast video {
+                box-shadow: 5px 5px 300px #000;
+            }
+        </style>
     </head>
     <body>
         <div class="hydrocast">
-            <video id="hydrocastVideo" controls width="600px">
+            <video width="600px" poster="poster.jpg">
                 <source src="videos/StarWars_TheLastJedi_2017.mp4" type="video/mp4">
                 <source src="videos/StarWars_TheLastJedi_2017.webm" type="video/webm">
                 <track src="subtitle/en.vtt" label="English" kind="subtitles" srclang="en" default>
             </video>
         </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $("video").bind("click", function () {
+                var vid = $(this).get(0);
+                if (vid.paused) vid.play(); else vid.pause();
+            });
+        </script>
     </body>
 </html>
